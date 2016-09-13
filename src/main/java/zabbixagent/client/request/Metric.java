@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.sun.istack.internal.NotNull;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 @JsonTypeName("Metric")
@@ -19,7 +19,7 @@ public class Metric {
     }
 
     @JsonCreator
-    public Metric(@NotNull @JsonProperty("key") String key, @Nullable @JsonProperty("name") String name) {
+    public Metric(@Nonnull @JsonProperty("key") String key, @Nullable @JsonProperty("name") String name) {
         this.key = key;
         this.name = name;
     }
@@ -29,7 +29,7 @@ public class Metric {
         return name;
     }
 
-    @NotNull
+    @Nonnull
     public String getKey() {
         return key;
     }

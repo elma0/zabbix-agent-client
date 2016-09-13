@@ -1,23 +1,23 @@
 package zabbixagent.client.request;
 
 
-import com.sun.istack.internal.NotNull;
+import javax.annotation.Nonnull;
 
 public class Target {
     private Integer port;
     private String hostname;
 
-    public Target(@NotNull String hostname, @NotNull Integer port) {
+    public Target(@Nonnull String hostname, @Nonnull Integer port) {
         this.port = port;
         this.hostname = hostname;
     }
 
-    @NotNull
+    @Nonnull
     public Integer getPort() {
         return port;
     }
 
-    @NotNull
+    @Nonnull
     public String getHostname() {
         return hostname;
     }

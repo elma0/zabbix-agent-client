@@ -15,4 +15,5 @@ Usage:
             System.out.println(e.getMessage());
         }
     });
+    client.shootdown()
 ```

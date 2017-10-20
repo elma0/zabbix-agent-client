@@ -15,9 +15,6 @@
     <bean id="classPathResource" class="org.springframework.core.io.ClassPathResource">
         <constructor-arg value="metrics.json"/>
     </bean>
-    <bean id="channelFactory"
-          class="zabbixagent.client.ChannelFactoryImpl"/>
-
     <bean class="tests.EchoServer" scope="prototype">
         <constructor-arg>
             <ref bean="echoServerHandler"/>

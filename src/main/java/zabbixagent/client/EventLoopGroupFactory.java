@@ -2,6 +2,7 @@ package zabbixagent.client;
 
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.epoll.Epoll;
+import io.netty.channel.epoll.EpollEventLoopGroup;
 import io.netty.channel.epoll.EpollSocketChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -32,9 +33,9 @@ public class EventLoopGroupFactory implements FactoryBean<ChannelEventLoopGroup>
 
     private ChannelEventLoopGroup newEpollEventLoopGroup(int ioThreadCount) {
         if (ioThreadCount > 0) {
-            return new ChannelEventLoopGroup(new NioEventLoopGroup(ioThreadCount), EpollSocketChannel.class);
+            return new ChannelEventLoopGroup(new EpollEventLoopGroup(ioThreadCount), EpollSocketChannel.class);
         } else {
-            return new ChannelEventLoopGroup(new NioEventLoopGroup(), EpollSocketChannel.class);
+            return new ChannelEventLoopGroup(new EpollEventLoopGroup(), EpollSocketChannel.class);
         }
     }
 

@@ -8,19 +8,7 @@
     http://www.springframework.org/schema/context/spring-context-3.0.xsd"
        default-lazy-init="true">
     <context:annotation-config/>
-    <bean id="bootstrap"
-          class="zabbixagent.client.BootstrapFactory"/>
-    <bean id="client"
-          class="zabbixagent.client.ZabbixAgentClient">
-    </bean>
-
-    <bean id="zbxHandler" scope="prototype"
-          class="zabbixagent.client.response.ZabbixHeaderDecoder"/>
-    <bean id="msgToEventHandler"
-          class="zabbixagent.client.response.MessageToEventPipe"/>
-
-    <bean class="zabbixagent.client.SpringMapProvider"/>
-
+    <import resource="classpath:zabbix-agent-client.xml"/>
     <bean id="serializer" class="com.fasterxml.jackson.databind.ObjectMapper"/>
     <bean id="jsonFile" factory-bean="classPathResource" factory-method="getFile">
     </bean>
@@ -29,8 +17,7 @@
     </bean>
     <bean id="channelFactory"
           class="zabbixagent.client.ChannelFactoryImpl"/>
-    <bean id="handlers" class="zabbixagent.client.response.ZbxChannelInitializer">
-    </bean>
+
     <bean class="tests.EchoServer" scope="prototype">
         <constructor-arg>
             <ref bean="echoServerHandler"/>

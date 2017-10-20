@@ -37,7 +37,7 @@ public class ChannelFactoryImpl implements ChannelFactory {
     public ChannelFactoryImpl() {
     }
 
-    public ChannelFuture requestMetric(Target target, Metric metric, final Callback callback) {
+    public ChannelFuture requestMetric(Target target, Metric metric, final Callback callback) throws IllegalArgumentException{
         ChannelFuture channelFuture = null;
         final String metricKey = metric.getKey();
         if (metricKey != null) {

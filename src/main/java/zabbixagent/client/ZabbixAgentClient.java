@@ -16,9 +16,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 
 public class ZabbixAgentClient {
@@ -34,7 +32,7 @@ public class ZabbixAgentClient {
     private static final Logger LOGGER = LoggerFactory.getLogger(ZabbixAgentClient.class);
 
     @EventListener
-    public void onApplicationEvent(ZabbixValue zabbixValue) {
+    private void onApplicationEvent(ZabbixValue zabbixValue) {
         ChannelValuePair pair = ((ChannelValuePair) zabbixValue.getSource());
         String channel = ((ChannelValuePair) zabbixValue.getSource()).getChannel();
         Callback callback = callbacks.remove(channel);

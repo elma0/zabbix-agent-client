@@ -13,6 +13,7 @@ import zabbixagent.client.ZabbixValue;
 
 import javax.inject.Inject;
 
+import static io.netty.util.CharsetUtil.UTF_8;
 import static zabbixagent.client.ChannelFactoryImpl.CHANNEL_KEY;
 
 @ChannelHandler.Sharable
@@ -28,7 +29,8 @@ public class MessageToEventPipe extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         try {
-            publisher.publishEvent(new ZabbixValue(new ChannelValuePair(ctx.channel().attr(CHANNEL_KEY).get(), ((ByteBuf) msg).toString(CharsetUtil.UTF_8))));
+            publisher.publishEvent(new ZabbixValue(new ChannelValuePair(ctx.channel().attr(CHANNEL_KEY).get(),
+                    ((ByteBuf) msg).toString(UTF_8))));
             ctx.close();
         } finally {
             ((ByteBuf) msg).release();

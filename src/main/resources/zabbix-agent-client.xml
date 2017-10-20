@@ -11,7 +11,7 @@
           class="zabbixagent.client.BootstrapFactory"/>
     <bean id="channelFactory"
           class="zabbixagent.client.ChannelFactoryImpl"/>
-    <bean id="zabbixMetricsRequester"
+    <bean id="client"
           class="zabbixagent.client.ZabbixAgentClient">
     </bean>
     <bean class="zabbixagent.client.SpringMapProvider"/>
@@ -19,7 +19,7 @@
           class="zabbixagent.client.response.ZabbixHeaderDecoder"/>
     <bean id="msgToEventHandler"
           class="zabbixagent.client.response.MessageToEventPipe"/>
-    <bean class="zabbixagent.client.response.ZbxChannelInitializer">
+    <bean id="handlers" class="zabbixagent.client.response.ZbxChannelInitializer">
     </bean>
 
 </beans>

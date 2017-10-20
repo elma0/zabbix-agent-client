@@ -3,9 +3,6 @@ package zabbixagent.client;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.nio.NioSocketChannel;
 import org.springframework.beans.factory.FactoryBean;
 
 import javax.inject.Inject;
@@ -13,22 +10,16 @@ import javax.inject.Inject;
 public class BootstrapFactory implements FactoryBean<Bootstrap> {
     @Inject
     private ChannelInitializer channelInitializer;
-
-    public BootstrapFactory() {
-
-    }
+    @Inject
+    private ChannelEventLoopGroup eventLoopGroup;
 
     @Override
     public Bootstrap getObject() throws Exception {
-        Bootstrap bootstrap;
-        EventLoopGroup workerGroup;
-        workerGroup = new NioEventLoopGroup();
-        bootstrap = new Bootstrap();
-        bootstrap.group(workerGroup);
-        bootstrap.channel(NioSocketChannel.class);
-        bootstrap.option(ChannelOption.SO_KEEPALIVE, false);
-        bootstrap.handler(channelInitializer);
-        return bootstrap;
+        return new Bootstrap()
+                .group(eventLoopGroup.getEventLoopGroup())
+                .channel(eventLoopGroup.getChannel())
+                .option(ChannelOption.SO_KEEPALIVE, true)
+                .handler(channelInitializer);
     }
 
     @Override

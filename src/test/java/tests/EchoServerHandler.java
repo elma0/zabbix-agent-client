@@ -1,9 +1,7 @@
 package tests;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
@@ -19,8 +17,9 @@ import javax.inject.Named;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
+import java.util.stream.Stream;
 
+import static io.netty.buffer.Unpooled.wrappedBuffer;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
@@ -29,20 +28,35 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  */
 @Sharable
 public class EchoServerHandler extends ChannelInboundHandlerAdapter implements ApplicationContextAware {
-    public static final String VALUE = "1";
-    private RequestChecker checker;
     private Collection<String> keys;
+    @Inject
+    private ObjectMapper objectMapper;
+    @Inject
+    @Named("jsonFile")
+    private File metricsFile;
+    public static final String VALUE = "1";
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        try {
+            Metric[] metrics = objectMapper.readValue(metricsFile, Metric[].class);
+            keys = Stream.of(metrics).filter(metric -> !isEmpty(metric.getKey())).map(Metric::getKey).collect(toList());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         String request = ((ByteBuf) msg).toString(CharsetUtil.UTF_8);
         if (!keys.contains(request.substring(0, request.length() - 1))) {
-            System.out.println("Wrong request");
-            checker.setRequestFailed();
             ctx.close();
         }
-        //ZABBIX HEADER + "1"
-        ctx.write(Unpooled.wrappedBuffer(new byte[]{90, 66, 88, 68, 1, 1, 0, 0, 0, 0, 0, 0, 0}, VALUE.getBytes())).addListener((ChannelFuture channelFuture) -> {
+        ctx.write(
+                wrappedBuffer(
+                        new byte[]{90, 66, 88, 68, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+                        VALUE.getBytes())
+        ).addListener((ChannelFuture channelFuture) -> {
             if (channelFuture.isSuccess()) {
                 channelFuture.channel().close();
             }
@@ -59,24 +73,5 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter implements A
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         cause.printStackTrace();
         ctx.close();
-    }
-
-    @Inject
-    private ObjectMapper objectMapper;
-    @Inject
-    @Named("jsonFile")
-    private File metricsFile;
-
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        try {
-            checker = applicationContext.getBean(RequestChecker.class);
-            List<Metric> metrics = objectMapper.readValue(metricsFile, new TypeReference<List<Metric>>() {
-            });
-            keys = metrics.stream().filter(metric -> !isEmpty(metric.getKey())).map(Metric::getKey).collect(toList());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

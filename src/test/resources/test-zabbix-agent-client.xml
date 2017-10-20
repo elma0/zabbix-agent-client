@@ -13,7 +13,7 @@
     <bean id="jsonFile" factory-bean="classPathResource" factory-method="getFile">
     </bean>
     <bean id="classPathResource" class="org.springframework.core.io.ClassPathResource">
-        <constructor-arg value="Metrics.json"/>
+        <constructor-arg value="metrics.json"/>
     </bean>
     <bean id="channelFactory"
           class="zabbixagent.client.ChannelFactoryImpl"/>
@@ -24,5 +24,4 @@
         </constructor-arg>
     </bean>
     <bean id="echoServerHandler" class="tests.EchoServerHandler"/>
-    <bean class="tests.RequestChecker"/>
 </beans>

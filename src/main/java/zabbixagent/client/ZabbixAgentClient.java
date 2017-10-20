@@ -16,7 +16,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
-import java.util.concurrent.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 
 public class ZabbixAgentClient {
@@ -29,6 +31,8 @@ public class ZabbixAgentClient {
     @Inject
     @Named("channelFactory")
     private ChannelFactory channelFactory;
+    @Inject
+    private ChannelEventLoopGroup channelEventLoopGroup;
     private static final Logger LOGGER = LoggerFactory.getLogger(ZabbixAgentClient.class);
 
     @EventListener
@@ -116,5 +120,9 @@ public class ZabbixAgentClient {
 
     private int getConcurrentConnectionsCount(int soBacklog, int metricsCount) {
         return soBacklog < metricsCount ? soBacklog : metricsCount;
+    }
+
+    public void shootdown() {
+        channelEventLoopGroup.getEventLoopGroup().shutdownGracefully().awaitUninterruptibly();
     }
 }

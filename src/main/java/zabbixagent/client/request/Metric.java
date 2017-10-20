@@ -8,8 +8,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-@JsonTypeName("Metric")
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@type", defaultImpl = Metric.class)
 public class Metric {
     private String key;
     private String name;

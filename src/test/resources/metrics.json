@@ -1,170 +1,58 @@
 ﻿[
-  {
-    "key": "vm.memory.size[available]"
-  },
-  {
-    "key": "system.cpu.load[percpu,avg5]"
-  },
-  {
-    "key": "vfs.file.cksum[etcpasswd]"
-  },
-  {
-    "key": "net.if.collisions[eth0]"
-  },
-  {
-    "key": "vfs.fs.size[/home,pfree]"
-  },
-  {
-    "key": "system.cpu.load[percpu,avg15]"
-  },
-  {
-    "key": "system.cpu.load[percpu,avg1]"
-  },
-  {
-    "key": "vfs.fs.size[/tmp,free]"
-  },
-  {
-    "key": "net.tcp.listen[]"
-  },
-  {
-    "key": "vfs.fs.inode[/tmp,pfree]"
-  },
-  {
-    "key": "system.swap.size[,used]"
-  },
-  {
-    "key": "system.boottime"
-  },
-  {
-    "key": "system.uptime"
-  },
-  {
-    "key": "system.cpu.util[,user]"
-  },
-  {
-    "key": "system.users.num"
-  },
-  {
-    "key": "system.swap.size[,free]"
-  },
-  {
-    "key": "vfs.fs.size[/tmp,used]"
-  },
-  {
-    "key": "vfs.fs.size[/tmp,total]"
-  },
-  {
-    "key": "system.swap.out"
-  },
-  {
-    "key": "net.tcp.listen[10050]"
-  },
-  {
-    "key": "net.if.out[/eth0,errors]"
-  },
-  {
-    "key": "proc.num[,,run]"
-  },
-  {
-    "key": "net.if.out[/eth0,dropped]"
-  },
-  {
-    "key": "system.swap.in"
-  },
-  {
-    "key": "net.if.in[/eth0,dropped]"
-  },
-  {
-    "key": "net.tcp.listen[10050]"
-  },
-  {
-    "key": "net.if.in[eth0,errors]"
-  },
-  {
-    "key": "kernel.maxproc"
-  },
-  {
-    "key": "kernel.maxfiles"
-  },
-  {
-    "key": "net.if.in[eth0]"
-  },
-  {
-    "key": "vfs.dev.write[/dba,operations]"
-  },
-  {
-    "key": "system.cpu.num[online]"
-  },
-  {
-    "key": "system.cpu.util[,interrupt]"
-  },
-  {
-    "key": "system.swap.size[,total]"
-  },
-  {
-    "key": "vm.memory.size[cached]"
-  },
-  {
-    "key": "system.swap.size[,pused]"
-  },
-  {
-    "key": "net.if.out[/eth0]"
-  },
-  {
-    "key": "vm.memory.size[pavailable]"
-  },
-  {
-    "key": "vm.memory.size[pused]"
-  },
-  {
-    "key": "proc.num[]"
-  },
-  {
-    "key": "proc.num[zabbix_agentd,root,RUNNING,zabbix_agentd]"
-  },
-  {
-    "key": "system.cpu.util[,system]"
-  },
-  {
-    "key": "vfs.fs.size[tmp,free]"
-  },
-  {
-    "key": "agent.ping"
-  },
-  {
-    "key": "vm.memory.size[total]"
-  },
-  {
-    "key": "system.cpu.util[,idle]"
-  },
-  {
-    "key": "vfs.dev.read[/db0,ops]"
-  },
-  {
-    "key": "vfs.fs.size[tmp,used]"
-  },
-  {
-    "key": "system.swap.size[,pfree]"
-  },
-  {
-    "key": "vfs.dev.write[/db,ops]"
-  },
-  {
-    "key": "system.cpu.util[,softirq]"
-  },
-  {
-    "key": "vm.memory.size[used]"
-  },
-  {
-    "key": "system.cpu.util[,nice]"
-  },
-  {
-    "key": "vfs.dev.read[sda,operations]"
-  },
-  {
-    "key": "system.cpu.util[,iowait]"
-  },
-  {
-    "key": "vm.memory.size[free]"
-  }
+  "vm.memory.size[available]",
+  "system.cpu.load[percpu,avg5]",
+  "vfs.file.cksum[etcpasswd]",
+  "net.if.collisions[eth0]",
+  "vfs.fs.size[/home,pfree]",
+  "system.cpu.load[percpu,avg15]",
+  "system.cpu.load[percpu,avg1]",
+  "vfs.fs.size[/tmp,free]",
+  "net.tcp.listen[]",
+  "vfs.fs.inode[/tmp,pfree]",
+  "system.swap.size[,used]",
+  "system.boottime",
+  "system.uptime",
+  "system.cpu.util[,user]",
+  "system.users.num",
+  "system.swap.size[,free]",
+  "vfs.fs.size[/tmp,used]",
+  "vfs.fs.size[/tmp,total]",
+  "system.swap.out",
+  "net.tcp.listen[10050]",
+  "net.if.out[/eth0,errors]",
+  "proc.num[,,run]",
+  "net.if.out[/eth0,dropped]",
+  "system.swap.in",
+  "net.if.in[/eth0,dropped]",
+  "net.tcp.listen[10050]",
+  "net.if.in[eth0,errors]",
+  "kernel.maxproc",
+  "kernel.maxfiles",
+  "net.if.in[eth0]",
+  "vfs.dev.write[/dba,operations]",
+  "system.cpu.num[online]",
+  "system.cpu.util[,interrupt]",
+  "system.swap.size[,total]",
+  "vm.memory.size[cached]",
+  "system.swap.size[,pused]",
+  "net.if.out[/eth0]",
+  "vm.memory.size[pavailable]",
+  "vm.memory.size[pused]",
+  "proc.num[]",
+  "proc.num[zabbix_agentd,root,RUNNING,zabbix_agentd]",
+  "system.cpu.util[,system]",
+  "vfs.fs.size[tmp,free]",
+  "agent.ping",
+  "vm.memory.size[total]",
+  "system.cpu.util[,idle]",
+  "vfs.dev.read[/db0,ops]",
+  "vfs.fs.size[tmp,used]",
+  "system.swap.size[,pfree]",
+  "vfs.dev.write[/db,ops]",
+  "system.cpu.util[,softirq]",
+  "vm.memory.size[used]",
+  "system.cpu.util[,nice]",
+  "vfs.dev.read[sda,operations]",
+  "system.cpu.util[,iowait]",
+  "vm.memory.size[free]"
 ]
